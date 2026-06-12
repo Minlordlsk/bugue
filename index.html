@@ -3,19 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Um Presente para Você 💜</title>
+<title>Um Mar de Sentimentos 🌊</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,400&family=Lato:wght@300;400&family=Dancing+Script:wght@400;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --black: #07000f;
-    --deep: #0e0018;
-    --purple: #7b2fff;
-    --lilac: #c084fc;
-    --pale: #e9d5ff;
-    --white: #f8f0ff;
+    --deep-blue: #020813;
+    --ocean-blue: #0a2540;
+    --cyan: #00f2fe;
+    --seafoam: #4facfe;
+    --pale-blue: #e0f2fe;
+    --white: #ffffff;
   }
 
   html, body {
@@ -24,7 +24,7 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background: var(--black);
+    background: var(--deep-blue);
     color: var(--white);
     font-family: 'Lato', sans-serif;
     display: flex;
@@ -32,7 +32,7 @@
     align-items: center;
   }
 
-  #sky-canvas {
+  #ocean-canvas {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
@@ -51,28 +51,28 @@
   .message-title {
     font-family: 'Dancing Script', cursive;
     font-size: clamp(28px, 6vw, 42px);
-    color: var(--lilac);
+    color: var(--cyan);
     margin-bottom: 12px;
     opacity: 0.95;
-    filter: drop-shadow(0 0 10px rgba(192, 132, 252, 0.3));
+    filter: drop-shadow(0 0 12px rgba(0, 242, 254, 0.4));
   }
 
   .message-subtitle {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(16px, 3.8vw, 24px);
     font-style: italic;
-    color: rgba(233, 213, 255, 0.75);
+    color: rgba(224, 242, 254, 0.8);
     margin-bottom: 40px;
     line-height: 1.5;
   }
 
-  /* ─── BUQUÊ LUXUOSO E GIGANTE DA IMAGEM ─── */
+  /* ─── BUQUÊ DAS PROFUNDEZAS DO MAR ─── */
   .bouquet-wrapper {
     display: inline-block;
     position: relative;
     width: min(300px, 75vw);
     height: min(300px, 75vw);
-    background: radial-gradient(circle, rgba(168, 85, 247, 0.5) 0%, rgba(7, 0, 15, 0) 70%);
+    background: radial-gradient(circle, rgba(0, 242, 254, 0.4) 0%, rgba(2, 8, 19, 0) 70%);
     border-radius: 50%;
     cursor: pointer;
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.4s;
@@ -86,19 +86,19 @@
     display: block;
     position: relative;
     z-index: 5;
-    filter: drop-shadow(0 0 25px rgba(192, 132, 252, 0.7));
-    animation: floatBouquet 4s ease-in-out infinite alternate;
+    filter: drop-shadow(0 0 25px rgba(0, 242, 254, 0.6));
+    animation: floatSea 3.5s ease-in-out infinite alternate;
   }
 
   .bouquet-wrapper:hover {
-    transform: scale(1.12) rotate(3deg);
-    background: radial-gradient(circle, rgba(168, 85, 247, 0.7) 0%, rgba(7, 0, 15, 0) 70%);
-    filter: drop-shadow(0 0 50px rgba(192, 132, 252, 0.95));
+    transform: scale(1.12) rotate(-3deg);
+    background: radial-gradient(circle, rgba(79, 172, 254, 0.6) 0%, rgba(2, 8, 19, 0) 70%);
+    filter: drop-shadow(0 0 50px rgba(0, 242, 254, 0.9));
   }
 
   .click-caption {
     font-size: 11px;
-    color: var(--lilac);
+    color: var(--cyan);
     opacity: 0.6;
     margin-top: 35px;
     font-family: 'Lato', sans-serif;
@@ -107,7 +107,7 @@
     animation: pulseText 2s infinite;
   }
 
-  .fx-flower-petal {
+  .fx-ocean-item {
     position: fixed;
     z-index: 99999;
     pointer-events: none;
@@ -115,9 +115,9 @@
     will-change: transform, opacity;
   }
 
-  @keyframes floatBouquet {
-    0% { transform: translateY(0px) rotate(0deg); }
-    100% { transform: translateY(-15px) rotate(2deg); }
+  @keyframes floatSea {
+    0% { transform: translateY(5px) rotate(-1deg); }
+    100% { transform: translateY(-15px) rotate(3deg); }
   }
 
   @keyframes pulseText {
@@ -128,123 +128,120 @@
 </head>
 <body>
 
-<canvas id="sky-canvas"></canvas>
+<canvas id="ocean-canvas"></canvas>
 
 <div class="main-container">
-  <h1 class="message-title">Para Ling Ling 💜</h1>
-  <p class="message-subtitle">Porque algumas flores são tão especiais que merecem um lugar só delas.</p>
+  <h1 class="message-title">Para Ling Ling 🌊</h1>
+  <p class="message-subtitle">Porque o meu sentimento por você é tão profundo quanto o oceano.</p>
   
-  <div class="bouquet-wrapper" onclick="triggerMagicChuva(event)"></div>
+  <div class="bouquet-wrapper" onclick="triggerOceanMagic(event)"></div>
   
-  <p class="click-caption">✨ Clique no buquê ✨</p>
+  <p class="click-caption">💙 Clique no buquê 💙</p>
 </div>
 
 <script>
-// ─── CANVAS SKY (CÉU ESTRELADO) ───
-const canvas = document.getElementById('sky-canvas');
+// ─── CANVAS OCEAN (BOLHAS E LUZ SUBMARINA) ───
+const canvas = document.getElementById('ocean-canvas');
 const ctx = canvas.getContext('2d');
-let W, H, stars = [], shootingStars = [];
+let W, H, bubbles = [];
 
 function resize() {
   W = canvas.width = window.innerWidth;
   H = canvas.height = window.innerHeight;
-  buildStars();
+  buildBubbles();
 }
 
-function buildStars() {
-  stars = [];
-  for (let i = 0; i < 150; i++) {
-    stars.push({
+function buildBubbles() {
+  bubbles = [];
+  for (let i = 0; i < 60; i++) {
+    bubbles.push({
       x: Math.random() * W,
-      y: Math.random() * H,
-      r: Math.random() * 1.2 + 0.2,
-      alpha: Math.random(),
-      speed: Math.random() * 0.004 + 0.002,
-      phase: Math.random() * Math.PI * 2
+      y: Math.random() * H + H, // Começam abaixo ou espalhadas
+      r: Math.random() * 3 + 1,
+      speed: Math.random() * 1.5 + 0.5,
+      wobble: Math.random() * 2,
+      wobbleSpeed: Math.random() * 0.02
     });
   }
 }
 
-function drawSky(t) {
+function drawOcean(t) {
+  // Gradiente do fundo do mar (Escuro embaixo, levemente mais claro no topo)
   const g = ctx.createLinearGradient(0, 0, 0, H);
-  g.addColorStop(0, '#07000f');
-  g.addColorStop(0.5, '#0e0018');
-  g.addColorStop(1, '#130022');
+  g.addColorStop(0, '#041428');
+  g.addColorStop(0.6, '#020b18');
+  g.addColorStop(1, '#01050d');
   ctx.fillStyle = g;
   ctx.fillRect(0, 0, W, H);
 
-  stars.forEach(s => {
-    s.alpha = 0.3 + 0.5 * Math.abs(Math.sin(t * s.speed + s.phase));
-    ctx.beginPath();
-    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(220,200,255,${s.alpha})`;
-    ctx.fill();
-  });
+  // Desenhar e mover as bolhas subindo
+  bubbles.forEach(b => {
+    b.y -= b.speed;
+    b.x += Math.sin(t * b.wobbleSpeed) * 0.3;
 
-  if (Math.random() < 0.006) {
-    shootingStars.push({ x: Math.random() * W * 0.7, y: Math.random() * H * 0.4, len: 80 + Math.random() * 60, alpha: 1 });
-  }
-  shootingStars = shootingStars.filter(s => s.alpha > 0);
-  shootingStars.forEach(s => {
-    const grd = ctx.createLinearGradient(s.x, s.y, s.x + s.len, s.y + s.len * 0.4);
-    grd.addColorStop(0, `rgba(220,200,255,${s.alpha})`);
-    grd.addColorStop(1, 'rgba(220,200,255,0)');
-    ctx.strokeStyle = grd;
-    ctx.lineWidth = 1;
+    // Se a bolha sumir no topo, reseta para o fundo
+    if (b.y < -10) {
+      b.y = H + 10;
+      b.x = Math.random() * W;
+    }
+
     ctx.beginPath();
-    ctx.moveTo(s.x, s.y);
-    ctx.lineTo(s.x + s.len, s.y + s.len * 0.4);
+    ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(135, 206, 250, 0.3)';
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+    ctx.lineWidth = 0.5;
+    ctx.fill();
     ctx.stroke();
-    s.x += 3; s.y += 1.5; s.alpha -= 0.025;
   });
 }
 
 function loop(t) {
-  drawSky(t * 0.001);
+  drawOcean(t * 0.05);
   requestAnimationFrame(loop);
 }
 window.addEventListener('resize', resize);
 resize();
 requestAnimationFrame(loop);
 
-// ─── CHUVA DE FLORES INTERATIVA GIGANTE ───
-function triggerMagicChuva(event) {
-  const flores = ['🌸', '💜', '✨', '🌹', '🌷', '💐', '🌺', '🦋', '🔮'];
-  const quantidade = 55;
+// ─── EXPLOSÃO DE CONCHAS E PÉROLAS (FLUTUANDO PARA CIMA) ───
+function triggerOceanMagic(event) {
+  const marItems = ['🐚', '⭐', '🦪', '🌊', '💙', '🫧', '💎', '🌸'];
+  const quantidade = 50;
 
   const bq = event.currentTarget;
-  bq.style.transform = 'scale(0.9) rotate(-4deg)';
+  bq.style.transform = 'scale(0.92) rotate(4deg)';
   setTimeout(() => { bq.style.transform = ''; }, 250);
 
   for (let i = 0; i < quantidade; i++) {
     setTimeout(() => {
-      const f = document.createElement('div');
-      f.className = 'fx-flower-petal';
-      f.innerText = flores[Math.floor(Math.random() * flores.length)];
+      const item = document.createElement('div');
+      item.className = 'fx-ocean-item';
+      item.innerText = marItems[Math.floor(Math.random() * marItems.length)];
       
       const startX = Math.random() * 100;
-      f.style.left = startX + 'vw';
-      f.style.top = '-50px';
+      item.style.left = startX + 'vw';
+      item.style.bottom = '-50px'; // Elas brotam do fundo e sobem!
       
-      const tamanho = Math.random() * 20 + 26;
-      f.style.fontSize = tamanho + 'px';
-      f.style.opacity = Math.random() * 0.3 + 0.7;
-      f.style.filter = `drop-shadow(0 0 ${Math.random() * 8 + 5}px rgba(192, 132, 252, 0.85))`;
+      const tamanho = Math.random() * 18 + 24; // Tamanho ideal (24px a 42px)
+      item.style.fontSize = tamanho + 'px';
+      item.style.opacity = Math.random() * 0.4 + 0.6;
+      item.style.filter = `drop-shadow(0 0 ${Math.random() * 8 + 4}px rgba(0, 242, 254, 0.7))`;
       
-      const duracao = Math.random() * 2 + 2.5;
-      f.style.transition = `transform ${duracao}s linear, opacity ${duracao}s ease-out`;
+      const duracao = Math.random() * 2 + 3; // Ritmo de subida flutuante
+      item.style.transition = `transform ${duracao}s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity ${duracao}s ease-in`;
       
-      document.body.appendChild(f);
+      document.body.appendChild(item);
       
       setTimeout(() => {
-        const endX = startX + (Math.random() * 24 - 12);
-        const rodar = Math.random() * 720 - 360;
-        f.style.transform = `translate(${endX - startX}vw, 105vh) rotate(${rodar}deg)`;
-        f.style.opacity = '0';
+        const endX = startX + (Math.random() * 20 - 10);
+        const rodar = Math.random() * 360 - 180;
+        // Sobe cruzando a tela em direção ao topo
+        item.style.transform = `translate(${endX - startX}vw, -110vh) rotate(${rodar}deg)`;
+        item.style.opacity = '0';
       }, 50);
       
-      setTimeout(() => { f.remove(); }, duracao * 1000 + 100);
-    }, i * 40);
+      setTimeout(() => { item.remove(); }, duracao * 1000 + 100);
+    }, i * 45);
   }
 }
 </script>
