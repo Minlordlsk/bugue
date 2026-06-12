@@ -3,126 +3,191 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Um Mar de Sentimentos 🌊</title>
+<title>O Oceano que Existe em Você 🌊</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,400&family=Lato:wght@300;400&family=Dancing+Script:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,400;1,600&family=Lato:wght@300;400&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --deep-blue: #020813;
-    --ocean-blue: #0a2540;
-    --cyan: #00f2fe;
+    --deep-abyss: #01040a;
+    --midnight-blue: #020c1b;
+    --ocean-blue: #051b33;
     --seafoam: #4facfe;
+    --cyan: #00f2fe;
     --pale-blue: #e0f2fe;
     --white: #ffffff;
   }
 
   html, body {
     width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background: var(--deep-blue);
+    background-color: var(--deep-abyss);
     color: var(--white);
     font-family: 'Lato', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
+  /* Canvas Fixo no Fundo */
   #ocean-canvas {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    z-index: 0;
+    z-index: 1;
     pointer-events: none;
   }
 
-  .main-container {
-    position: relative;
-    z-index: 10;
-    text-align: center;
-    padding: 20px;
-    max-width: 500px;
-  }
-
-  .message-title {
-    font-family: 'Dancing Script', cursive;
-    font-size: clamp(28px, 6vw, 42px);
-    color: var(--cyan);
-    margin-bottom: 12px;
-    opacity: 0.95;
-    filter: drop-shadow(0 0 12px rgba(0, 242, 254, 0.4));
-  }
-
-  .message-subtitle {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(16px, 3.8vw, 24px);
-    font-style: italic;
-    color: rgba(224, 242, 254, 0.8);
-    margin-bottom: 40px;
-    line-height: 1.5;
-  }
-
-  /* ─── BUQUÊ DAS PROFUNDEZAS DO MAR ─── */
-  .bouquet-wrapper {
-    display: inline-block;
-    position: relative;
-    width: min(300px, 75vw);
-    height: min(300px, 75vw);
-    background: radial-gradient(circle, rgba(0, 242, 254, 0.4) 0%, rgba(2, 8, 19, 0) 70%);
-    border-radius: 50%;
-    cursor: pointer;
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.4s;
-    user-select: none;
-  }
-
-  .bouquet-wrapper::before {
-    content: "💐";
-    font-size: clamp(120px, 26vw, 150px);
-    line-height: min(300px, 75vw);
-    display: block;
+  /* Container de Conteúdo Fluido */
+  .experience-wrapper {
     position: relative;
     z-index: 5;
-    filter: drop-shadow(0 0 25px rgba(0, 242, 254, 0.6));
-    animation: floatSea 3.5s ease-in-out infinite alternate;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
-  .bouquet-wrapper:hover {
-    transform: scale(1.12) rotate(-3deg);
-    background: radial-gradient(circle, rgba(79, 172, 254, 0.6) 0%, rgba(2, 8, 19, 0) 70%);
-    filter: drop-shadow(0 0 50px rgba(0, 242, 254, 0.9));
+  /* Seções de Telas Cheias para a Experiência */
+  .view-section {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    text-align: center;
+    position: relative;
   }
 
-  .click-caption {
+  /* Título Principal de Entrada */
+  .intro-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(36px, 8vw, 64px);
+    color: var(--cyan);
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 15px rgba(0, 242, 254, 0.5));
+  }
+
+  .intro-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 4vw, 26px);
+    font-style: italic;
+    color: rgba(224, 242, 254, 0.75);
+    max-width: 600px;
+    line-height: 1.6;
+    margin-bottom: 50px;
+  }
+
+  /* Scroll Indicator Animado */
+  .scroll-down {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--seafoam);
+    opacity: 0.7;
+    animation: bounce 2s infinite;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 20px;
+  }
+
+  /* Estilização Luxuosa dos 3 Poemas */
+  .poem-container {
+    max-width: 650px;
+    padding: 40px;
+    background: rgba(5, 27, 51, 0.25);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 20px;
+    border: 1px solid rgba(0, 242, 254, 0.15);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    transition: transform 0.5s ease, border-color 0.5s ease;
+  }
+
+  .poem-container:hover {
+    transform: translateY(-5px);
+    border-color: rgba(0, 242, 254, 0.4);
+    box-shadow: 0 25px 60px rgba(0, 242, 254, 0.1);
+  }
+
+  .poem-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(26px, 5vw, 36px);
+    color: var(--cyan);
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+  }
+
+  .poem-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 4vw, 23px);
+    line-height: 1.8;
+    color: var(--pale-blue);
+    font-style: italic;
+  }
+
+  /* Elemento Especial Interativo */
+  .whale-interact {
+    font-size: clamp(70px, 15vw, 100px);
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: drop-shadow(0 0 20px rgba(0, 242, 254, 0.4));
+    animation: gentleSwim 5s ease-in-out infinite alternate;
+  }
+
+  .whale-interact:hover {
+    transform: scale(1.18) rotate(-5deg);
+    filter: drop-shadow(0 0 40px rgba(0, 242, 254, 0.8));
+  }
+
+  .click-alert {
     font-size: 11px;
     color: var(--cyan);
-    opacity: 0.6;
-    margin-top: 35px;
-    font-family: 'Lato', sans-serif;
-    letter-spacing: 0.2em;
+    opacity: 0.5;
     text-transform: uppercase;
-    animation: pulseText 2s infinite;
+    letter-spacing: 0.2em;
+    margin-top: 20px;
   }
 
-  .fx-ocean-item {
+  /* Efeito de Ondas de Som / Bolhas no Clique */
+  .ocean-sonar {
     position: fixed;
-    z-index: 99999;
+    border: 2px solid var(--cyan);
+    border-radius: 50%;
     pointer-events: none;
-    user-select: none;
-    will-change: transform, opacity;
+    z-index: 9999;
+    animation: sonarEffect 1.5s ease-out forwards;
   }
 
-  @keyframes floatSea {
-    0% { transform: translateY(5px) rotate(-1deg); }
-    100% { transform: translateY(-15px) rotate(3deg); }
+  /* Animações */
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
   }
 
-  @keyframes pulseText {
-    0%, 100% { opacity: 0.4; }
-    50% { opacity: 0.9; }
+  @keyframes gentleSwim {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-12px) rotate(2deg); }
+  }
+
+  @keyframes sonarEffect {
+    0% { width: 0; height: 0; opacity: 1; transform: translate(-50%, -50%); }
+    100% { width: 400px; height: 400px; opacity: 0; transform: translate(-50%, -50%); }
+  }
+
+  /* Classes de Revelação no Scroll */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+  }
+
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
   }
 </style>
 </head>
@@ -130,120 +195,269 @@
 
 <canvas id="ocean-canvas"></canvas>
 
-<div class="main-container">
-  <h1 class="message-title">Para Ling Ling 🌊</h1>
-  <p class="message-subtitle">Porque o meu sentimento por você é tão profundo quanto o oceano.</p>
+<div class="experience-wrapper">
   
-  <div class="bouquet-wrapper" onclick="triggerOceanMagic(event)"></div>
-  
-  <p class="click-caption">💙 Clique no buquê 💙</p>
+  <section class="view-section">
+    <h1 class="intro-title">O Oceano de Ling Ling</h1>
+    <p class="intro-subtitle">Há quem pertença à terra firme, mas você sempre pertenceu à imensidão secreta do mar. Role para baixo e mergulhe.</p>
+    <a href="#poema1" class="scroll-down">Mergulhar 🌊</a>
+  </section>
+
+  <section class="view-section" id="poema1">
+    <div class="poem-container reveal">
+      <h2 class="poem-title">I. Cantos Profundos</h2>
+      <p class="poem-body">
+        Você se perde em doramas e mundos distantes,<br>
+        como quem busca no fundo do mar<br>
+        um mistério que ninguém conseguiu decifrar.<br><br>
+        Dizem que as baleias cantam segredos<br>
+        que só o oceano consegue entender.<br>
+        E você, com esse seu jeito guardado,<br>
+        é a imensidão mais linda que eu tive a sorte de conhecer.
+      </p>
+    </div>
+    <a href="#poema2" class="scroll-down" style="margin-top: 40px;">Continuar Descendo ⚓</a>
+  </section>
+
+  <section class="view-section" id="poema2">
+    <div class="poem-container reveal">
+      <h2 class="poem-title">II. Correnteza</h2>
+      <p class="poem-body">
+        Seu coração não aceita linhas marcadas,<br>
+        você ama a liberdade de um mar sem fim.<br>
+        E longe de tentar prender suas ondas,<br>
+        eu só queria navegar perto de ti.<br><br>
+        Que os teus sonhos te levem além do horizonte,<br>
+        onde as águas calmas encontram o céu azul.<br>
+        E que o meu carinho seja o porto seguro<br>
+        quando a correnteza te puxar para o sul.
+      </p>
+    </div>
+    <a href="#poema3" class="scroll-down" style="margin-top: 40px;">Ir mais fundo 🐋</a>
+  </section>
+
+  <section class="view-section" id="poema3">
+    <div class="poem-container reveal" style="margin-bottom: 40px;">
+      <h2 class="poem-title">III. O Horizonte Dela</h2>
+      <p class="poem-body">
+        Entre bilhões de pessoas na terra,<br>
+        fui me apaixonar por quem prefere o mar.<br>
+        A garota que olha para o infinito azul<br>
+        e me ensina, em silêncio, a sonhar.<br><br>
+        O mundo é grande demais para quem tem asas nas barbatanas,<br>
+        mas em cada mar que você decidir viajar,<br>
+        haverá uma lembrança nossa guardada,<br>
+        esperando você voltar.
+      </p>
+    </div>
+
+    <div class="whale-interact reveal" onclick="triggerWhaleSonar(event)">🐋</div>
+    <p class="click-alert reveal">Toque nela para ouvir o oceano</p>
+  </section>
+
 </div>
 
 <script>
-// ─── CANVAS OCEAN (BOLHAS E LUZ SUBMARINA) ───
+// ─── CANVAS: ANIMAÇÃO DE PEIXES, BALEIAS E BOLHAS DO OCEANO ───
 const canvas = document.getElementById('ocean-canvas');
 const ctx = canvas.getContext('2d');
-let W, H, bubbles = [];
+let W, H;
+let bubbles = [], fishes = [], whales = [];
 
 function resize() {
   W = canvas.width = window.innerWidth;
   H = canvas.height = window.innerHeight;
-  buildBubbles();
 }
 
-function buildBubbles() {
+// Inicializar elementos do mar
+function initMarineLife() {
   bubbles = [];
-  for (let i = 0; i < 60; i++) {
+  fishes = [];
+  whales = [];
+
+  // Bolhas subindo
+  for (let i = 0; i < 50; i++) {
     bubbles.push({
       x: Math.random() * W,
-      y: Math.random() * H + H, // Começam abaixo ou espalhadas
-      r: Math.random() * 3 + 1,
-      speed: Math.random() * 1.5 + 0.5,
-      wobble: Math.random() * 2,
+      y: Math.random() * H + H,
+      r: Math.random() * 2.5 + 0.5,
+      speed: Math.random() * 1.2 + 0.4,
       wobbleSpeed: Math.random() * 0.02
+    });
+  }
+
+  // Cardumes de peixinhos nadando horizontalmente
+  for (let i = 0; i < 12; i++) {
+    fishes.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      size: Math.random() * 6 + 4,
+      speed: Math.random() * 1.5 + 0.5,
+      direction: Math.random() > 0.5 ? 1 : -1,
+      depth: Math.random() * 0.5 + 0.2
+    });
+  }
+
+  // Silhuetas de Baleias gigantes e raras cruzando o fundo do cenário
+  for (let i = 0; i < 2; i++) {
+    whales.push({
+      x: i * (W / 2) + Math.random() * 200,
+      y: Math.random() * (H * 0.6) + H * 0.2,
+      size: Math.random() * 40 + 60,
+      speed: Math.random() * 0.3 + 0.1,
+      direction: 1,
+      angle: 0
     });
   }
 }
 
-function drawOcean(t) {
-  // Gradiente do fundo do mar (Escuro embaixo, levemente mais claro no topo)
+function drawOceanBackground(t) {
   const g = ctx.createLinearGradient(0, 0, 0, H);
-  g.addColorStop(0, '#041428');
-  g.addColorStop(0.6, '#020b18');
-  g.addColorStop(1, '#01050d');
+  g.addColorStop(0, '#041226');
+  g.addColorStop(0.5, '#020914');
+  g.addColorStop(1, '#000308');
   ctx.fillStyle = g;
   ctx.fillRect(0, 0, W, H);
 
-  // Desenhar e mover as bolhas subindo
+  // Efeito de raios de sol sutis penetrando no topo do mar
+  ctx.fillStyle = 'rgba(0, 242, 254, 0.02)';
+  ctx.beginPath();
+  ctx.moveTo(W * 0.2, 0);
+  ctx.lineTo(W * 0.4, H);
+  ctx.lineTo(W * 0.1, H);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.moveTo(W * 0.7, 0);
+  ctx.lineTo(W * 0.9, H);
+  ctx.lineTo(W * 0.6, H);
+  ctx.closePath();
+  ctx.fill();
+
+  // Mover e desenhar as bolhas
   bubbles.forEach(b => {
     b.y -= b.speed;
-    b.x += Math.sin(t * b.wobbleSpeed) * 0.3;
-
-    // Se a bolha sumir no topo, reseta para o fundo
+    b.x += Math.sin(t * b.wobbleSpeed) * 0.2;
     if (b.y < -10) {
       b.y = H + 10;
       b.x = Math.random() * W;
     }
-
     ctx.beginPath();
     ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(135, 206, 250, 0.3)';
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
-    ctx.lineWidth = 0.5;
+    ctx.fillStyle = `rgba(135, 206, 250, ${Math.random() * 0.15 + 0.15})`;
     ctx.fill();
-    ctx.stroke();
+  });
+
+  // Mover e desenhar as silhuetas de Baleias de Fundo
+  whales.forEach(w => {
+    w.x += w.speed * w.direction;
+    w.angle += 0.005;
+    const currentY = w.y + Math.sin(w.angle) * 1.5;
+
+    if (w.x > W + w.size * 2) { w.x = -w.size * 2; w.y = Math.random() * (H * 0.6) + H * 0.2; }
+
+    ctx.save();
+    ctx.translate(w.x, currentY);
+    ctx.fillStyle = 'rgba(0, 242, 254, 0.04)'; 
+    
+    ctx.beginPath();
+    ctx.ellipse(0, 0, w.size, w.size * 0.35, 0, 0, Math.PI * 2);
+    ctx.moveTo(-w.size, 0);
+    ctx.lineTo(-w.size * 1.4, -w.size * 0.3);
+    ctx.lineTo(-w.size * 1.3, 0);
+    ctx.lineTo(-w.size * 1.4, w.size * 0.3);
+    ctx.moveTo(w.size * 0.1, w.size * 0.2);
+    ctx.lineTo(-w.size * 0.1, w.size * 0.6);
+    ctx.lineTo(-w.size * 0.3, w.size * 0.2);
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+  });
+
+  // Peixinhos nadando
+  fishes.forEach(f => {
+    f.x += f.speed * f.direction;
+    if (f.x > W + 20) f.x = -20;
+    if (f.x < -20) f.x = W + 20;
+
+    ctx.beginPath();
+    ctx.ellipse(f.x, f.y, f.size, f.size * 0.5, 0, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(79, 172, 254, ${f.depth})`;
+    ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(f.x - f.size * f.direction, f.y);
+    ctx.lineTo(f.x - f.size * 1.4 * f.direction, f.y - f.size * 0.4);
+    ctx.lineTo(f.x - f.size * 1.4 * f.direction, f.y + f.size * 0.4);
+    ctx.closePath();
+    ctx.fill();
   });
 }
 
 function loop(t) {
-  drawOcean(t * 0.05);
+  drawOceanBackground(t * 0.03);
   requestAnimationFrame(loop);
 }
-window.addEventListener('resize', resize);
-resize();
-requestAnimationFrame(loop);
 
-// ─── EXPLOSÃO DE CONCHAS E PÉROLAS (FLUTUANDO PARA CIMA) ───
-function triggerOceanMagic(event) {
-  const marItems = ['🐚', '⭐', '🦪', '🌊', '💙', '🫧', '💎', '🌸'];
-  const quantidade = 50;
+// ─── INTERATIVIDADE: ECO DE SONAR DA BALEIA ───
+function triggerWhaleSonar(event) {
+  const rect = event.target.getBoundingClientRect();
+  const clickX = rect.left + rect.width / 2;
+  const clickY = rect.top + rect.height / 2;
 
-  const bq = event.currentTarget;
-  bq.style.transform = 'scale(0.92) rotate(4deg)';
-  setTimeout(() => { bq.style.transform = ''; }, 250);
-
-  for (let i = 0; i < quantidade; i++) {
+  for (let i = 0; i < 3; i++) {
     setTimeout(() => {
-      const item = document.createElement('div');
-      item.className = 'fx-ocean-item';
-      item.innerText = marItems[Math.floor(Math.random() * marItems.length)];
-      
-      const startX = Math.random() * 100;
-      item.style.left = startX + 'vw';
-      item.style.bottom = '-50px'; // Elas brotam do fundo e sobem!
-      
-      const tamanho = Math.random() * 18 + 24; // Tamanho ideal (24px a 42px)
-      item.style.fontSize = tamanho + 'px';
-      item.style.opacity = Math.random() * 0.4 + 0.6;
-      item.style.filter = `drop-shadow(0 0 ${Math.random() * 8 + 4}px rgba(0, 242, 254, 0.7))`;
-      
-      const duracao = Math.random() * 2 + 3; // Ritmo de subida flutuante
-      item.style.transition = `transform ${duracao}s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity ${duracao}s ease-in`;
-      
-      document.body.appendChild(item);
+      const sonar = document.createElement('div');
+      sonar.className = 'ocean-sonar';
+      sonar.style.left = clickX + 'px';
+      sonar.style.top = clickY + 'px';
+      document.body.appendChild(sonar);
+      setTimeout(() => sonar.remove(), 1500);
+    }, i * 350);
+  }
+
+  for (let i = 0; i < 20; i++) {
+    setTimeout(() => {
+      const b = document.createElement('div');
+      b.style.position = 'fixed';
+      b.style.left = (clickX + (Math.random() * 60 - 30)) + 'px';
+      b.style.top = (clickY + (Math.random() * 40 - 20)) + 'px';
+      b.style.fontSize = (Math.random() * 12 + 12) + 'px';
+      b.style.pointerEvents = 'none';
+      b.style.zIndex = '9998';
+      b.innerText = '🫧';
+      b.style.transition = 'transform 2s cubic-bezier(0.1, 0.8, 0.3, 1), opacity 2s';
+      document.body.appendChild(b);
       
       setTimeout(() => {
-        const endX = startX + (Math.random() * 20 - 10);
-        const rodar = Math.random() * 360 - 180;
-        // Sobe cruzando a tela em direção ao topo
-        item.style.transform = `translate(${endX - startX}vw, -110vh) rotate(${rodar}deg)`;
-        item.style.opacity = '0';
+        b.style.transform = `translate(${Math.random() * 160 - 80}px, -200px) scale(1.5)`;
+        b.style.opacity = '0';
       }, 50);
-      
-      setTimeout(() => { item.remove(); }, duracao * 1000 + 100);
-    }, i * 45);
+      setTimeout(() => b.remove(), 2000);
+    }, i * 30);
   }
 }
+
+// ─── REVELAÇÃO NO SCROLL ───
+function checkReveal() {
+  const reveals = document.querySelectorAll('.reveal');
+  reveals.forEach(r => {
+    const windowHeight = window.innerHeight;
+    const elementTop = r.getBoundingClientRect().top;
+    const elementVisible = 120;
+    if (elementTop < windowHeight - elementVisible) {
+      r.classList.add('active');
+    }
+  });
+}
+
+window.addEventListener('scroll', checkReveal);
+window.addEventListener('resize', resize);
+
+resize();
+initMarineLife();
+requestAnimationFrame(loop);
+setTimeout(checkReveal, 300);
 </script>
 </body>
 </html>
